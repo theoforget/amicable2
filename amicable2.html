@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title> Amicable Numbers </title>
+    <style>
+        .box {
+            background-color: white;
+            width: 50%;
+            min-width: 300px;
+            border: 15px solid #320505;
+            align: justify;
+            font-family: Gill Sans, sans-serif;
+            color: #320505;
+            font-size: 40px;
+            padding: 40px;
+            margin: 20px;
+        }
+        .button {
+            background-color: #320505;
+            width: 50%;
+            min-width: 300px;
+            height: 50px;
+            font-family: Gill Sans, sans-serif;
+            font-size: 40px;
+            color: white;
+            border: 10px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body style="background-color: #FFE9E9">
+    <center>
+        <div class="box">
+            Welcome to the AMICABLE NUMBERS <br> Enter two numbers to see if they are amicable...
+        </div>
+    </center>
+    <center>
+        <div class="box">
+            <form>
+                Number 1: <input type="number" id="num1" style="font-size:30px"> <br>
+                Number 2: <input type="number" id="num2" style="font-size:30px"> <br>
+            </form>
+        </div>
+        <button class="button" onclick="checkAmicable()" style="font-size:40px">
+            CHECK
+        </button>
+        <div id="result"></div>
+        <div id="diagnostics"></div>
+    </center>
+    <script type="text/javascript">
+        function checkAmicable()
+        {
+            var first = document.getElementById("num1").value;
+            var second = document.getElementById("num2").value;
+            if (first == "" || second == "") {
+                alert("Empty Input!");
+                return;
+            }
+            var first_factors = [], second_factors = [];
+            var first_factor_sum = 0, second_factor_sum = 0;
+            for (n = 1; n < first; n++) {
+                if (first % n == 0) {
+                    first_factors.push(n);
+                    first_factor_sum += n;
+                }    
+            }
+            for (n = 1; n < second; n++) {
+                if (second % n == 0) {
+                    second_factors.push(n);
+                    second_factor_sum += n;
+                }
+            }
+            message2 = "<div class='box' style='width:70%'>Diagnostics<br>" + first + ": [ ";
+            for (i=0; i < first_factors.length - 1; i++)
+                message2 += first_factors[i] + ", ";
+            message2 += first_factors[first_factors.length - 1] + "] = " + first_factor_sum + "<br>" + second + ": [ ";
+            for (i=0; i < second_factors.length - 1; i++)
+                message2 += second_factors[i] + ", ";
+            message2 += second_factors[second_factors.length - 1] + "] = " + second_factor_sum + "</div>";
+            message1 = "<div class='box'> The numbers: " + first + " and " + second;
+            if (first_factor_sum == second && second_factor_sum == first) {
+                message1 += " are amicable</div>";
+            } else
+                message1 += " are not amicable</div>";
+            document.getElementById("result").innerHTML = message1;
+            document.getElementById("diagnostics").innerHTML = message2;
+        }
+    </script>
+</body>
+</html>
